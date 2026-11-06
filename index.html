@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tamir Atölyesi</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #14161a; overflow: hidden; font-family: system-ui, sans-serif; color: #f7f3e8; }
+    #unity-canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; background: #14161a; outline: none; }
+    #loader { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+    #loader h1 { margin: 0; font-size: clamp(28px, 6vw, 56px); color: #f2b134; letter-spacing: .04em; }
+    #track { width: min(420px, 80vw); height: 14px; border-radius: 8px; background: rgba(255,255,255,.14); overflow: hidden; }
+    #fill { width: 0; height: 100%; background: #46c25b; border-radius: 8px; }
+    #note { font-size: 15px; opacity: .75; text-align: center; padding: 0 16px; }
+  </style>
+</head>
+<body>
+  <canvas id="unity-canvas" tabindex="-1"></canvas>
+  <div id="loader">
+    <h1>TAMİR ATÖLYESİ</h1>
+    <div id="track"><div id="fill"></div></div>
+    <div id="note">Yükleniyor. Oyun klavye ve fare ile bilgisayarda oynanır.</div>
+  </div>
+  <script src="Build/529a4988a5e69fd3b2560dbf6484c610.loader.js"></script>
+  <script>
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+      arguments: [],
+      dataUrl: "Build/91f1cc5bc885feacdb514ebc96402d0d.data.unityweb",
+      frameworkUrl: "Build/f1808459093cd01c7dbb8acbf7f6e290.framework.js.unityweb",
+      codeUrl: "Build/c759b84adcbd10c4c825dabed490999b.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Hüseyin",
+      productName: "Tamir Atölyesi",
+      productVersion: "0.1.0",
+    }, function (progress) {
+      document.querySelector("#fill").style.width = (100 * progress) + "%";
+    }).then(function () {
+      document.querySelector("#loader").remove();
+    }).catch(function (message) {
+      document.querySelector("#note").textContent = "Oyun açılamadı: " + message;
+    });
+  </script>
+</body>
+</html>
